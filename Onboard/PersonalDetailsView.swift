@@ -6,10 +6,66 @@
 //
 
 import SwiftUI
+import Combine
 
 class PersonalDetailViewModel: ObservableObject {
     @Published var model = PersonalDetail()
+    @Published var isNext = false
+    @Published var isHoroscopeNext = false
+    @Published var isEducationNext = false
+    @Published var isFamilyNext = false
+    @Published var isAddressNext = false
+    @Published var isPreview = false
+    @Published var isBlack = false
+    @Published var isBrown = false
     
+    
+    var publisher = PassthroughSubject<String, Never>()
+    var horoscopePublisher = PassthroughSubject<String, Never>()
+    var educationPublisher = PassthroughSubject<String, Never>()
+    var familyPublisher = PassthroughSubject<String, Never>()
+    var addressPublisher = PassthroughSubject<String, Never>()
+    var previewPublisher = PassthroughSubject<String, Never>()
+    var subscription = Set<AnyCancellable>()
+    
+    init() {
+        publisher.sink {  (_) in
+            print("Button Preseed")
+//            let fontFamily = UIFont.familyNames
+//            for font in fontFamily {
+//                print(UIFont.fontNames(forFamilyName: font))
+//            }
+         //   print(fontFamily)
+         
+          self.isNext = true
+         UIApplication.shared.endEditing()
+        }.store(in: &subscription)
+        
+        horoscopePublisher.sink {  (_) in
+            print("Button Preseed")
+          self.isHoroscopeNext = true
+        }.store(in: &subscription)
+        
+        educationPublisher.sink {  (_) in
+            print("Button Preseed")
+          self.isEducationNext = true
+        }.store(in: &subscription)
+        
+        familyPublisher.sink {  (_) in
+            print("Button Preseed")
+          self.isFamilyNext = true
+        }.store(in: &subscription)
+        
+        addressPublisher.sink {  (_) in
+            print("Button Preseed")
+          self.isAddressNext = true
+        }.store(in: &subscription)
+        
+        previewPublisher.sink {  (_) in
+            print("Button Preseed")
+          self.isPreview = true
+        }.store(in: &subscription)
+    }
     
 }
 
@@ -25,86 +81,43 @@ class PersonalDetail {
     var complexian: Complexian = .varyfair
     var contactNumber = ""
     var email = ""
+    var hobbies = ""
+    var dateOfBirth = ""
+    var placeOfBirth = ""
+    var mangalType: Mangal = Mangal.no
+    var kuldevekGotra = ""
+    var educationDetails = ""
+    var educationDetails2 = ""
+    var educationDetails3 = ""
+    var occupationDetails = ""
+    var income = ""
+    var grandFatherName = ""
+    var grandMotherName = ""
+    var fatherName = ""
+    var fatherOccupation = ""
+    var motherName = ""
+    var motherOccupation = ""
+    var noOfSiblings = ""
+    var siblingsDetails = ""
+    var siblingsDetailsSis = ""
+    var paternalUncleDetails = ""
+    var maternalUncleDetails = ""
+    var parentContactNumber = ""
+    var partnerExpectations = ""
+    var residentialAddress = ""
+    var bioDataText = ""
     
-}
-
-enum Flavor: String, CaseIterable, Identifiable {
-    case chocolate, vanilla, strawberry
-    var id: Self { self }
-}
-
-enum Complexian: String, CaseIterable, Identifiable {
-    case varyfair = "Very Fair"
-    case fair = "Fair"
-    case medium = "Medium"
-    case wheatish = "Wheatish"
-    case dark = "Dark"
-    
-    var id: Self { self }
-}
-
-
-enum Height: String, CaseIterable, Identifiable {
-    case fourftOneInc = "4ft 1inch"
-    case fourftTwoInc = "4ft 2inch"
-    case fourftThreeInc = "4ft 3inch"
-    case fourftFourInc = "4ft 4inch"
-    case fourftFiveInc = "4ft 5inch"
-    case fourftSixInc = "4ft 6inch"
-    case fourftSevenInc = "4ft 7inch"
-    case fourftEightInc = "4ft 8inch"
-    case fourftNineInc = "4ft 9inch"
-    case fourftTenInc = "4ft 10inch"
-    case fourftElevenInc = "4ft 11inch"
-    case fiveft = "5ft"
-    case fiveftOneInc = "5ft 1inch"
-    case fiveftTwoInc = "5ft 2inch"
-    case fiveftThreeInc = "5ft 3inch"
-    case fiveftFourInc = "5ft 4inch"
-    case fiveftFiveInc = "5ft 5inch"
-    case fiveftSixInc = "5ft 6inch"
-    case fiveftSevenInc = "5ft 7inch"
-    case fiveftEightInc = "5ft 8inch"
-    case fiveftNineInc = "5ft 9inch"
-    case fiveftTenInc = "5ft 10inch"
-    case fiveftElevenInc = "5ft 11inch"
-    case sixft = "6ft"
-    case sixftOneInc = "6ft 1inch"
-    case sixftTwoInc = "6ft 2inch"
-    case sixftThreeInc = "6ft 3inch"
-    case sixftFourInc = "6ft 4inch"
-    case sixftFiveInc = "6ft 5inch"
-    case sixftSixInc = "6ft 6inch"
-    case sixftSevenInc = "6ft 7inch"
-    case sixftEightInc = "6ft 8inch"
-    case sixftNineInc = "6ft 9inch"
-    case sixftTenInc = "6ft 10inch"
-    case sixftElevenInc = "6ft 11inch"
-    
-    var id: Self { self }
-}
-
-enum BloodGroup: String, CaseIterable, Identifiable {
-   case apositive = "A+"
-   case anegative = "A-"
-   case bpositive = "B+"
-   case bnegative = "B-"
-   case abpositive = "AB+"
-   case abnegative = "AB-"
-   case opositive = "O+"
-   case onegative = "O-"
-    
-    var id: Self { self }
 }
 
 struct PersonalDetailsView: View {
     
     @StateObject var viewModel = PersonalDetailViewModel()
+    @State private var textStyle = UIFont.TextStyle.body
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
             VStack(alignment: .leading, spacing: 10) {
-                
+               
                 VStack(alignment: .leading, spacing: 5) {
                     Text(StringConstant.share.full_name)
                         .modifier(TitleStyles(fontName: FontName.regular, fontSize: FontSize.medium))
@@ -220,29 +233,70 @@ struct PersonalDetailsView: View {
                     }.textFieldStyle(BorderCustomTextFieldStyle(isError: false))
                     .keyboardType(.phonePad)
                    
-                    
                 }
                 
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(StringConstant.share.email)
-                        .modifier(TitleStyles(fontName: FontName.regular, fontSize: FontSize.medium))
-                    TextField(StringConstant.share.email, text: $viewModel.model.email) { (isChange) in
-                        print(isChange)
-                    } onCommit: {
-                        print("Commit value")
-                    }.textFieldStyle(BorderCustomTextFieldStyle(isError: false))
-                    .keyboardType(.emailAddress)
-                    
-                   
-                    
-                }
+                bottomView
+                
             }.padding([.leading, .trailing], 20)
             .padding([.top], 20)
             
             .navigationBarTitle(StringConstant.share.personal_Details)
         }
     }
+   
+    
+    var bottomView: some View {
+        Group {
+            VStack(alignment: .leading, spacing: 5) {
+                Text(StringConstant.share.email)
+                    .modifier(TitleStyles(fontName: FontName.regular, fontSize: FontSize.medium))
+                TextField(StringConstant.share.email, text: $viewModel.model.email) { (isChange) in
+                    print(isChange)
+                } onCommit: {
+                    print("Commit value")
+                }.textFieldStyle(BorderCustomTextFieldStyle(isError: false))
+                .keyboardType(.emailAddress)
+            }
+            
+//            VStack(alignment: .leading, spacing: 5) {
+//                Text(StringConstant.share.hobbies)
+//                    .modifier(TitleStyles(fontName: FontName.regular, fontSize: FontSize.medium))
+//                TextField(StringConstant.share.hobbies, text: $viewModel.model.hobbies) { (isChange) in
+//                    print(isChange)
+//                } onCommit: {
+//                    print("Commit value")
+//                }.frame(height: 120)
+//                .padding()
+//                .background(RoundedRectangle(cornerRadius: 5.0).fill(Color.white))
+//                .cornerRadius(10.0)
+//                .border( COLOR.borderColor, width: 1.0)
+//
+//                //.textFieldStyle(BorderCustomTextFieldStyle(isError: false))
+//
+//
+//            }
+            VStack(alignment: .leading, spacing: 5) {
+                    Text(StringConstant.share.hobbies)
+                    .modifier(TitleStyles(fontName: FontName.regular, fontSize: FontSize.medium))
+//                TextView(text: $viewModel.model.hobbies, textStyle: $textStyle)
+//                    .frame(height: 100)
+//                    .padding()
+//                    .border( COLOR.borderColor, width: 1.0)
+               
+                TextField(StringConstant.share.hobbies, text: $viewModel.model.hobbies) { (isChange) in
+                    print(isChange)
+                } onCommit: {
+                    print("Commit value")
+                }.textFieldStyle(BorderCustomTextFieldStyle(isError: false))
+            }
+            
+            NavigationLink(destination: HoroscopeDetailsView(viewModel: viewModel), isActive: $viewModel.isNext) {
+                ButtonView(title: StringConstant.share.next, textColor: .white, publisher:  viewModel.publisher)
+            }.background(COLOR.buttonBackgroundColor)
+        }
+    }
 }
+
 
 struct PersonalDetailsView_Previews: PreviewProvider {
     static var previews: some View {
