@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SettingsProfileView: View {
     @ObservedObject var viewModel: PersonalDetailViewModel
+    @State private var isShowPhotoLibrary = false
+   // @State private var image: UIImage? = nil
   
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
@@ -16,13 +18,29 @@ struct SettingsProfileView: View {
                 
                 VStack(alignment: .leading, spacing: 5) {
                     HStack {
-                    Image("profileImageDefault")
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                        .aspectRatio(contentMode: .fill)
+                        if let img = viewModel.model.image {
+                            Image(uiImage: img)
+                                .resizable()
+                                .frame(width: 100, height: 100)
+                                .cornerRadius(50.0)
+                                .overlay(RoundedRectangle(cornerRadius: 50.0)
+                                            .stroke(Color.blue, lineWidth: 4))
+                                .aspectRatio(contentMode: .fill)
+                                
+                        } else {
+                            Image("profileImageDefault")
+                                .resizable()
+                                .frame(width: 100, height: 100)
+                                .cornerRadius(50.0)
+                                .overlay(RoundedRectangle(cornerRadius: 50.0)
+                                            .stroke(Color.blue, lineWidth: 4))
+                                .aspectRatio(contentMode: .fill)
+                        }
+                        
                     
                     Button {
                         print("Load picture clicked")
+                        self.isShowPhotoLibrary = true
                     } label: {
                         Text(StringConstant.share.loadPicture)
                             .modifier(TitleStyles(fontName: FontName.regular, fontSize: FontSize.medium))
@@ -83,6 +101,9 @@ struct SettingsProfileView: View {
            
         }
         .navigationBarTitle(StringConstant.share.profileImage)
+        .sheet(isPresented: $isShowPhotoLibrary) {
+            ImagePicker(sourceType: .photoLibrary, selectedImage: $viewModel.model.image)
+        }
        
     }
 }

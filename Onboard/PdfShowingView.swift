@@ -9,7 +9,13 @@ import SwiftUI
 
 struct PdfShowingView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            WebView(url: getUrl())
+        }
+    }
+    
+    func getUrl() -> URL {
+       return PersonalDetailViewModel.getDocumentsDirectory().appendingPathComponent("myCoolPDF.pdf")
     }
 }
 

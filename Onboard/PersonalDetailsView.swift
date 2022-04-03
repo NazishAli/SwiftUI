@@ -64,7 +64,108 @@ class PersonalDetailViewModel: ObservableObject {
         previewPublisher.sink {  (_) in
             print("Button Preseed")
           self.isPreview = true
+          self.createPdf()
         }.store(in: &subscription)
+    }
+    
+    
+    
+    func createPdf() {
+        let pageWidth = 8.5 * 72.0
+        let pageHeight = 11 * 72.0
+        let pageRect = CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight)
+        
+        let renderer = UIGraphicsPDFRenderer(bounds: pageRect)
+        
+        let pdf = renderer.pdfData { (context) in
+          context.beginPage()
+            let yNext = addTitle(pageRect: pageRect, title: StringConstant.share.name, data: model.fullName)
+            let yImage = addImage(pageRect: pageRect, imageTop: 36)
+            print(yNext)
+            print(yImage)
+        }
+        
+        let filePath = PersonalDetailViewModel.getDocumentsDirectory().appendingPathComponent("myCoolPDF.pdf")
+        print(filePath)
+        do {
+            try pdf.write(to: filePath)
+        } catch (let error) {
+            print("error localizedDescription")
+            print(error.localizedDescription)
+        }
+    }
+    
+    func addTitle(pageRect: CGRect, title: String, data: String) -> CGFloat {
+      // 1
+      let titleFont = UIFont.systemFont(ofSize: 24, weight: .bold)
+      let textFont = UIFont.systemFont(ofSize: 24, weight: .regular)
+      // 2
+      let titleAttributes: [NSAttributedString.Key: Any] =
+        [NSAttributedString.Key.font: titleFont]
+        
+        let textAttributes: [NSAttributedString.Key: Any] =
+          [NSAttributedString.Key.font: textFont]
+      // 3
+      let attributedTitle = NSAttributedString(
+        string: "\(title):",
+        attributes: titleAttributes
+      )
+        
+      let attributedText = NSAttributedString(
+          string: " \(data)",
+          attributes: textAttributes
+      )
+        
+    let mutableAttribute = NSMutableAttributedString()
+    mutableAttribute.append(attributedTitle)
+    mutableAttribute.append(attributedText)
+      // 4
+      let titleStringSize = mutableAttribute.size()
+      // 5
+      let titleStringRect = CGRect(
+        x: 30,
+        y: 36,
+        width: titleStringSize.width,
+        height: titleStringSize.height
+      )
+      // 6
+        mutableAttribute.draw(in: titleStringRect)
+      // 7
+      return titleStringRect.origin.y + titleStringRect.size.height
+    }
+    
+    
+    func addImage(pageRect: CGRect, imageTop: CGFloat) -> CGFloat {
+      // 1
+        
+    if let image = model.image {
+      let maxHeight = pageRect.height * 0.4
+      let maxWidth = pageRect.width * 0.3
+      // 2
+      let aspectWidth = maxWidth / image.size.width
+      let aspectHeight = maxHeight / image.size.height
+      let aspectRatio = min(aspectWidth, aspectHeight)
+      // 3
+      let scaledWidth = image.size.width * aspectRatio
+      let scaledHeight = image.size.height * aspectRatio
+      // 4
+      let imageX = (pageRect.width - scaledWidth) / 2.0
+            let imageRect = CGRect(x: pageRect.width - scaledWidth - 20, y: imageTop,
+                             width: scaledWidth, height: scaledHeight)
+      // 5
+      image.draw(in: imageRect)
+      return imageRect.origin.y + imageRect.size.height
+     }
+        
+      return 0
+    }
+    
+   class func getDocumentsDirectory() -> URL {
+        // find all possible documents directories for this user
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+
+        // just send back the first one, which ought to be the only one
+        return paths[0]
     }
     
 }
@@ -106,6 +207,7 @@ class PersonalDetail {
     var partnerExpectations = ""
     var residentialAddress = ""
     var bioDataText = ""
+    var image: UIImage?
     
 }
 

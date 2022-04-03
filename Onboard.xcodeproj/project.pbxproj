@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		120BA55627F8448100A693B7 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120BA55527F8448100A693B7 /* ImagePicker.swift */; };
 		12138327278C137700583DBD /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12138326278C137700583DBD /* ButtonView.swift */; };
 		122A77B127A5636800B4C1DB /* BorderCustomTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A77B027A5636800B4C1DB /* BorderCustomTextFieldStyle.swift */; };
 		122A77BA27A56B7D00B4C1DB /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A77B927A56B7D00B4C1DB /* Constant.swift */; };
 		124D63FF27B150D7000F26E9 /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124D63FE27B150D7000F26E9 /* CustomButtonStyle.swift */; };
 		1263724B27EF41C50007E50D /* SettingsProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1263724A27EF41C50007E50D /* SettingsProfileView.swift */; };
 		1277AF6527E8EB620084763E /* EducationalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1277AF6427E8EB610084763E /* EducationalDetailView.swift */; };
+		1284B79027F9C78900DDE1CB /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1284B78F27F9C78900DDE1CB /* WebView.swift */; };
 		12878B2F27845D15003143FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12878B2E27845D15003143FD /* AppDelegate.swift */; };
 		12878B3127845D15003143FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12878B3027845D15003143FD /* SceneDelegate.swift */; };
 		12878B3327845D15003143FD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12878B3227845D15003143FD /* ContentView.swift */; };
@@ -50,12 +52,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		120BA55527F8448100A693B7 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		12138326278C137700583DBD /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		122A77B027A5636800B4C1DB /* BorderCustomTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderCustomTextFieldStyle.swift; sourceTree = "<group>"; };
 		122A77B927A56B7D00B4C1DB /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		124D63FE27B150D7000F26E9 /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
 		1263724A27EF41C50007E50D /* SettingsProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProfileView.swift; sourceTree = "<group>"; };
 		1277AF6427E8EB610084763E /* EducationalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationalDetailView.swift; sourceTree = "<group>"; };
+		1284B78F27F9C78900DDE1CB /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		12878B2B27845D15003143FD /* Onboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Onboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12878B2E27845D15003143FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12878B3027845D15003143FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 			children = (
 				12138326278C137700583DBD /* ButtonView.swift */,
 				12B8ADEF27D5DD8A00F9DDF6 /* TextView.swift */,
+				120BA55527F8448100A693B7 /* ImagePicker.swift */,
+				1284B78F27F9C78900DDE1CB /* WebView.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -336,12 +342,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				122A77BA27A56B7D00B4C1DB /* Constant.swift in Sources */,
+				1284B79027F9C78900DDE1CB /* WebView.swift in Sources */,
 				122A77B127A5636800B4C1DB /* BorderCustomTextFieldStyle.swift in Sources */,
 				124D63FF27B150D7000F26E9 /* CustomButtonStyle.swift in Sources */,
 				12B8ADF027D5DD8A00F9DDF6 /* TextView.swift in Sources */,
 				128F05C427D2345400E67AC2 /* PdfShowingView.swift in Sources */,
 				12B50B8027EC466E00129A93 /* FamilyDetailsView.swift in Sources */,
 				12878B2F27845D15003143FD /* AppDelegate.swift in Sources */,
+				120BA55627F8448100A693B7 /* ImagePicker.swift in Sources */,
 				128A65F827B6E0F500D08B0C /* PersonalDetailsView.swift in Sources */,
 				12D5CAC227B000720092B4FC /* TextStyles.swift in Sources */,
 				129117BD27ACF9060090C3FE /* HomeScreenView.swift in Sources */,

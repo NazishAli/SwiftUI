@@ -25,6 +25,7 @@ class StringConstant {
     let personal_Details = "Personal Details"
     let family_background_Details = "Family Background Details"
     let full_name = "Full Name"
+    let name = "Name"
     let religion = "Religion"
     let caste = "Caste"
     let dob = "Date Of Birth"
